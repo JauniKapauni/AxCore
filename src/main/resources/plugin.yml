@@ -1,0 +1,11 @@
+name: AxCore
+description: $description
+prefix: AxCore
+version: '${version}'
+
+main: de.jaunikapauni.axcore.AxCore
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors: [ JauniKapauni ]
+website: https://github.com/JauniKapauni
