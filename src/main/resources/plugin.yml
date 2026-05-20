@@ -16,3 +16,4 @@ commands:
   fly:
   gm:
   ping:
+  motd:

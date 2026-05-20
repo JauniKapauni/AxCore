@@ -13,6 +13,7 @@ public final class AxCore extends JavaPlugin {
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("gm").setExecutor(new GameModeCommand());
         getCommand("ping").setExecutor(new PingCommand());
+        getCommand("motd").setExecutor(new MOTDCommand());
     }
 
     @Override
