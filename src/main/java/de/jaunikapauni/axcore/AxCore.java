@@ -17,6 +17,7 @@ public final class AxCore extends JavaPlugin {
         getCommand("day").setExecutor(new DayCommand());
         getCommand("night").setExecutor(new NightCommand());
         getCommand("weather").setExecutor(new NightCommand());
+        getCommand("flyspeed").setExecutor(new FlySpeedCommand());
     }
 
     @Override
