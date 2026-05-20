@@ -14,7 +14,7 @@ public class HealCommand implements CommandExecutor {
         if(pHealth==20.0){
             p.sendMessage("You are already healed!");
         } else {
-            p.setHealth(20.0);
+            p.setHealth(p.getMaxHealth());
             p.sendMessage("You were healed!");
         }
         return true;
