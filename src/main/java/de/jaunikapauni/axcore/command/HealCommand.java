@@ -1,5 +1,6 @@
 package de.jaunikapauni.axcore.command;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,10 +13,10 @@ public class HealCommand implements CommandExecutor {
         Player p = (Player) sender;
         double pHealth = p.getHealth();
         if(pHealth==20.0){
-            p.sendMessage("You are already healed!");
+            p.sendMessage(ChatColor.RED + "You are already healed!");
         } else {
             p.setHealth(p.getMaxHealth());
-            p.sendMessage("You were healed!");
+            p.sendMessage(ChatColor.GREEN + "You were healed!");
         }
         return true;
     }
