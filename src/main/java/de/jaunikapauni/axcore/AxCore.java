@@ -16,6 +16,7 @@ public final class AxCore extends JavaPlugin {
         getCommand("motd").setExecutor(new MOTDCommand());
         getCommand("day").setExecutor(new DayCommand());
         getCommand("night").setExecutor(new NightCommand());
+        getCommand("weather").setExecutor(new NightCommand());
     }
 
     @Override

@@ -19,3 +19,4 @@ commands:
   motd:
   day:
   night:
+  weather:
