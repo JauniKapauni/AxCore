@@ -12,6 +12,10 @@ import org.jetbrains.annotations.NotNull;
 public class MOTDCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        if(!(sender instanceof Player)){
+            sender.sendMessage("Only players can run this command!");
+            return false;
+        }
         Player p = (Player) sender;
         String newMOTD = "";
         for(int i = 0; i < args.length; i++){

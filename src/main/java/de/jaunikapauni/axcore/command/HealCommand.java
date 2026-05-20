@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 public class HealCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        if(!(sender instanceof Player)){
+            sender.sendMessage("Only players can run this command!");
+            return false;
+        }
         Player p = (Player) sender;
         double pHealth = p.getHealth();
         if(pHealth==20.0){

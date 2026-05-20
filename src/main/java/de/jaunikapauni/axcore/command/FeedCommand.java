@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 public class FeedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        if(!(sender instanceof Player)){
+            sender.sendMessage("Only players can run this command!");
+            return false;
+        }
         Player p = (Player) sender;
         if(p.getFoodLevel() == 20){
             p.sendMessage(ChatColor.RED + "You are already saturated!");

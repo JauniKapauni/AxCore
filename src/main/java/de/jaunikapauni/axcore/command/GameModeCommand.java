@@ -11,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 public class GameModeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        if(!(sender instanceof Player)){
+            sender.sendMessage("Only players can run this command!");
+            return false;
+        }
         Player p = (Player) sender;
         if(args.length == 0){
             p.sendMessage(ChatColor.RED + "Please enter a gamemode!");
