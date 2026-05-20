@@ -17,3 +17,5 @@ commands:
   gm:
   ping:
   motd:
+  day:
+  night:
