@@ -1,9 +1,6 @@
 package de.jaunikapauni.axcore;
 
-import de.jaunikapauni.axcore.command.FeedCommand;
-import de.jaunikapauni.axcore.command.FlyCommand;
-import de.jaunikapauni.axcore.command.GameModeCommand;
-import de.jaunikapauni.axcore.command.HealCommand;
+import de.jaunikapauni.axcore.command.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AxCore extends JavaPlugin {
@@ -15,6 +12,7 @@ public final class AxCore extends JavaPlugin {
         getCommand("feed").setExecutor(new FeedCommand());
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("gm").setExecutor(new GameModeCommand());
+        getCommand("ping").setExecutor(new PingCommand());
     }
 
     @Override
