@@ -18,6 +18,13 @@ public final class AxCore extends JavaPlugin {
         getCommand("night").setExecutor(new NightCommand());
         getCommand("weather").setExecutor(new NightCommand());
         getCommand("flyspeed").setExecutor(new FlySpeedCommand());
+        getLogger().info("");
+        getLogger().info("----------------------------------------");
+        getLogger().info("Name: " + getName());
+        getLogger().info("Version: " + getDescription().getVersion());
+        getLogger().info(String.join("Authors: " + ", ", getDescription().getAuthors()));
+        getLogger().info("----------------------------------------");
+        getLogger().info("");
     }
 
     @Override
