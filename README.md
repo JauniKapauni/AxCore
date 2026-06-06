@@ -1,6 +1,9 @@
 # AxCore
 >Minecraft plugin that adds all essential commands to a minecraft server
 ---
+## Requirements
+- Minecraft Paper 26.1.2 Server
+---
 ## Features
 - Day
 - Feed
@@ -15,7 +18,7 @@
 ---
 ## Installation
 1. Download the latest release
-2. Put the `.jar` into the `/plugins` folder of every server to be synchronized
+2. Put the `.jar` into the `/plugins` folder
 3. Start the server
 ---
 ## Support
