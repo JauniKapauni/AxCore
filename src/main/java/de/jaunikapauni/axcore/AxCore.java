@@ -12,6 +12,7 @@ public final class AxCore extends JavaPlugin {
         getCommand("feed").setExecutor(new FeedCommand());
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("gm").setExecutor(new GameModeCommand());
+        getCommand("gm").setTabCompleter(new GameModeTabCompleter());
         getCommand("ping").setExecutor(new PingCommand());
         getCommand("motd").setExecutor(new MOTDCommand());
         getCommand("day").setExecutor(new DayCommand());
