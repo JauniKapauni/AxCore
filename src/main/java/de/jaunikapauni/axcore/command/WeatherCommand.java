@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class WeatherCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        if(!(sender instanceof PingCommand)){
+        if(!(sender instanceof Player)){
             sender.sendMessage("Only players can run this command!");
             return false;
         }
