@@ -15,6 +15,10 @@ public class DayCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.day")){
+            p.sendMessage("You don't have the permission! [axcore.day]");
+            return true;
+        }
         p.sendMessage(ChatColor.GREEN + "The time was set to day!");
         p.getWorld().setTime(1000);
         return true;

@@ -15,6 +15,10 @@ public class HealCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.heal")){
+            p.sendMessage("You don't have the permission! [axcore.heal]");
+            return true;
+        }
         double pHealth = p.getHealth();
         if(pHealth==20.0){
             p.sendMessage(ChatColor.RED + "You are already healed!");

@@ -15,6 +15,10 @@ public class WeatherCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.weather")){
+            p.sendMessage("You don't have the permission! [axcore.weather]");
+            return true;
+        }
         World w = p.getWorld();
 
         if (args.length == 0) {

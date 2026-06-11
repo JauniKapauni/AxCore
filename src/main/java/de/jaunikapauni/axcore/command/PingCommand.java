@@ -15,6 +15,10 @@ public class PingCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.ping")){
+            p.sendMessage("You don't have the permission! [axcore.ping]");
+            return true;
+        }
         int playerPing = p.getPing();
         if(playerPing < 50){
             p.sendMessage(ChatColor.GREEN + "" + playerPing);

@@ -15,6 +15,10 @@ public class FlyCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.fly")){
+            p.sendMessage("You don't have the permission! [axcore.fly]");
+            return true;
+        }
         if(p.getAllowFlight()){
             p.setAllowFlight(false);
             p.setFlying(false);

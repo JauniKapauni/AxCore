@@ -15,6 +15,10 @@ public class FlySpeedCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.flyspeed")){
+            p.sendMessage("You don't have the permission! [axcore.flyspeed]");
+            return true;
+        }
         if(args.length == 0){
             p.sendMessage(ChatColor.RED + "Please enter a flyspeed!");
             return false;

@@ -15,6 +15,10 @@ public class FeedCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.feed")){
+            p.sendMessage("You don't have the permission! [axcore.feed]");
+            return true;
+        }
         if(p.getFoodLevel() == 20){
             p.sendMessage(ChatColor.RED + "You are already saturated!");
         } else {

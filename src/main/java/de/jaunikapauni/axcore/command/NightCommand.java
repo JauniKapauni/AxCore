@@ -15,6 +15,10 @@ public class NightCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.night")){
+            p.sendMessage("You don't have the permission! [axcore.night]");
+            return true;
+        }
         p.sendMessage(ChatColor.GREEN + "The time was set to night!");
         p.getWorld().setTime(13000);
         return true;

@@ -16,6 +16,10 @@ public class GameModeCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.gamemode")){
+            p.sendMessage("You don't have the permission! [axcore.gamemode]");
+            return true;
+        }
         if(args.length == 0){
             p.sendMessage(ChatColor.RED + "Please enter a gamemode!");
             return false;

@@ -17,6 +17,10 @@ public class MOTDCommand implements CommandExecutor {
             return false;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.motd")){
+            p.sendMessage("You don't have the permission! [axcore.motd]");
+            return true;
+        }
         String newMOTD = "";
         for(int i = 0; i < args.length; i++){
             newMOTD += args[i];
