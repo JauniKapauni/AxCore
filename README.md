@@ -21,6 +21,17 @@
 2. Put the `.jar` into the `/plugins` folder
 3. Start the server
 ---
+## Commands & Permissions
+- `/day` - `axcore.day`
+- `/feed` - `axcore.feed`
+- `/fly` - `axcore.fly`
+- `/flyspeed` - `axcore.flyspeed`
+- `/gamemode` - `axcore.gamemode`
+- `/heal` - `axcore.heal`
+- `/motd` - `axcore.motd`
+- `/night` - `axcore.night`
+- `/ping` - `axcore.ping`
+- `/weather` - `axcore.weather`
 ## Support
 Discord: [AxForge](https://discord.gg/rYSxV4daS8)
 ---
