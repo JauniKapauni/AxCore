@@ -21,13 +21,7 @@ public class MOTDCommand implements CommandExecutor {
             p.sendMessage("You don't have the permission! [axcore.motd]");
             return true;
         }
-        String newMOTD = "";
-        for(int i = 0; i < args.length; i++){
-            newMOTD += args[i];
-            if(i < args.length - 1){
-                newMOTD = " ";
-            }
-        }
+        String newMOTD = String.join(" ", args);
         Bukkit.getServer().motd(Component.text(newMOTD));
         p.sendMessage(ChatColor.GREEN + "The motd was changed!");
         return true;
