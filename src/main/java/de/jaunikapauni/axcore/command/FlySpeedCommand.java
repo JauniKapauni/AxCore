@@ -32,9 +32,9 @@ public class FlySpeedCommand implements CommandExecutor {
             float flySpeed = speed / 10.0f;
             p.setFlySpeed(flySpeed);
             p.sendMessage(ChatColor.GREEN + "Your flyspeed was changed to: " + flySpeed);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+        } catch (NumberFormatException e) {
+            p.sendMessage(ChatColor.RED + "Please enter a valid number!");
         }
-        return false;
+        return true;
     }
 }
