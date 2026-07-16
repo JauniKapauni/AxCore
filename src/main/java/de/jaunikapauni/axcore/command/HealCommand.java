@@ -20,7 +20,7 @@ public class HealCommand implements CommandExecutor {
             return true;
         }
         double pHealth = p.getHealth();
-        if(pHealth==20.0){
+        if(pHealth >= p.getMaxHealth()){
             p.sendMessage(ChatColor.RED + "You are already healed!");
         } else {
             p.setHealth(p.getMaxHealth());
