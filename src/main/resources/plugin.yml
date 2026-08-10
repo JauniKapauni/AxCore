@@ -21,3 +21,6 @@ commands:
   night:
   weather:
   flyspeed:
+
+depend:
+  - AxEconomy

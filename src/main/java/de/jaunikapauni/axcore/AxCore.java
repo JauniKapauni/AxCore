@@ -1,9 +1,17 @@
 package de.jaunikapauni.axcore;
 
 import de.jaunikapauni.axcore.command.*;
+import de.jaunikapauni.axeconomy.AxEconomy;
+import de.jaunikapauni.axeconomy.api.EconomyAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AxCore extends JavaPlugin {
+
+    EconomyAPI economyAPI;
+    public EconomyAPI getEconomyAPI(){
+        return economyAPI;
+    }
 
     @Override
     public void onEnable() {
@@ -20,6 +28,10 @@ public final class AxCore extends JavaPlugin {
         getCommand("weather").setExecutor(new WeatherCommand());
         getCommand("weather").setTabCompleter(new WeatherTabCompleter());
         getCommand("flyspeed").setExecutor(new FlySpeedCommand());
+        AxEconomy axEconomy = (AxEconomy) Bukkit.getPluginManager().getPlugin("AxEconomy");
+        if(axEconomy != null){
+            economyAPI = axEconomy.getEconomyAPI();
+        }
         getLogger().info("");
         getLogger().info("----------------------------------------");
         getLogger().info("Name: " + getName());
