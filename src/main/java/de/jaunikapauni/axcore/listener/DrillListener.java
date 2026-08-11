@@ -27,6 +27,9 @@ public class DrillListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
+        if(reference.getConfig().getStringList("disabled-worlds").contains(e.getBlock().getWorld().getName())){
+            return;
+        }
         ItemStack itemStack = e.getPlayer().getInventory().getItemInMainHand();
         if(!reference.isDrill(itemStack)){
             return;

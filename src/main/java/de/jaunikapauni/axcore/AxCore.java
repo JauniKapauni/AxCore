@@ -45,6 +45,7 @@ public final class AxCore extends JavaPlugin {
         getLogger().info(String.join("Authors: " + ", ", getDescription().getAuthors()));
         getLogger().info("----------------------------------------");
         getLogger().info("");
+        saveDefaultConfig();
     }
 
     @Override
