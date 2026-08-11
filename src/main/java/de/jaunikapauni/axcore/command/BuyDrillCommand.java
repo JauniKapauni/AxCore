@@ -32,7 +32,9 @@ public class BuyDrillCommand implements CommandExecutor {
         ItemMeta meta = drill.getItemMeta();
         meta.displayName(Component.text(ChatColor.AQUA + "DRILL"));
         NamespacedKey namespacedKey = new NamespacedKey(reference, "drill");
+        NamespacedKey durabilityKey = new NamespacedKey(reference, "drill_uses");
         meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.BOOLEAN, true);
+        meta.getPersistentDataContainer().set(durabilityKey, PersistentDataType.INTEGER, 500);
         drill.setItemMeta(meta);
         if(reference.getEconomyAPI().has(p.getUniqueId(), 1000)){
             reference.getEconomyAPI().withdraw(p.getUniqueId(), 1000);

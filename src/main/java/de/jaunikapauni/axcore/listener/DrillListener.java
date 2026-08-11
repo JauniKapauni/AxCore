@@ -4,6 +4,7 @@ import de.jaunikapauni.axcore.AxCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -11,6 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 public class DrillListener implements Listener {
 
@@ -34,8 +38,23 @@ public class DrillListener implements Listener {
                     continue;
                 }
                 block.breakNaturally(itemStack);
+                damageDrill(itemStack);
             }
         }
+    }
+
+    private void damageDrill(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        NamespacedKey key = new NamespacedKey(reference, "drill_uses");
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        int uses = persistentDataContainer.getOrDefault(key, PersistentDataType.INTEGER, 0);
+        uses--;
+        if(uses <= 0){
+            itemStack.setAmount(0);
+            return;
+        }
+        persistentDataContainer.set(key, PersistentDataType.INTEGER, uses);
+        itemStack.setItemMeta(itemMeta);
     }
 
     private BlockFace getDirection(Player p){
