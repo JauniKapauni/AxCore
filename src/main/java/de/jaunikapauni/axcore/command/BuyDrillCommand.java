@@ -14,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class BuyDrillCommand implements CommandExecutor {
 
     AxCore reference;
@@ -35,6 +37,7 @@ public class BuyDrillCommand implements CommandExecutor {
         NamespacedKey durabilityKey = new NamespacedKey(reference, "drill_uses");
         meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.BOOLEAN, true);
         meta.getPersistentDataContainer().set(durabilityKey, PersistentDataType.INTEGER, 500);
+        meta.lore(List.of(Component.text(ChatColor.GRAY + "Uses: 500 / 500")));
         drill.setItemMeta(meta);
         if(reference.getEconomyAPI().has(p.getUniqueId(), 1000)){
             reference.getEconomyAPI().withdraw(p.getUniqueId(), 1000);

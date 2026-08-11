@@ -16,6 +16,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.List;
+
 public class DrillListener implements Listener {
 
     AxCore reference;
@@ -54,6 +56,7 @@ public class DrillListener implements Listener {
             return;
         }
         persistentDataContainer.set(key, PersistentDataType.INTEGER, uses);
+        itemMeta.lore(List.of(Component.text(ChatColor.GRAY + "Uses: " + uses + " / 500")));
         itemStack.setItemMeta(itemMeta);
     }
 
