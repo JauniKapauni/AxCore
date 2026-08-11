@@ -30,9 +30,10 @@ public class DrillListener implements Listener {
         for(int i = -2; i <= 2; i++){
             for(int j = -2; j <= 2; j++){
                 Block block = getOffsetBlock(center, face, i, j);
-                if(block.getType() != Material.AIR){
-                    block.breakNaturally(itemStack);
+                if(block.getType() == Material.AIR || block.getType() == Material.BEDROCK){
+                    continue;
                 }
+                block.breakNaturally(itemStack);
             }
         }
     }
