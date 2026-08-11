@@ -5,6 +5,9 @@ import de.jaunikapauni.axcore.listener.DrillListener;
 import de.jaunikapauni.axeconomy.AxEconomy;
 import de.jaunikapauni.axeconomy.api.EconomyAPI;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AxCore extends JavaPlugin {
@@ -34,7 +37,7 @@ public final class AxCore extends JavaPlugin {
             economyAPI = axEconomy.getEconomyAPI();
         }
         getCommand("buydrill").setExecutor(new BuyDrillCommand(this));
-        getServer().getPluginManager().registerEvents(new DrillListener(), this);
+        getServer().getPluginManager().registerEvents(new DrillListener(this), this);
         getLogger().info("");
         getLogger().info("----------------------------------------");
         getLogger().info("Name: " + getName());
@@ -47,5 +50,13 @@ public final class AxCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public boolean isDrill(ItemStack itemStack){
+        if(itemStack.getItemMeta() == null){
+            return false;
+        }
+        NamespacedKey namespacedKey = new NamespacedKey(this, "drill");
+        return itemStack.getItemMeta().getPersistentDataContainer().has(namespacedKey, PersistentDataType.BOOLEAN);
     }
 }

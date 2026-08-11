@@ -4,12 +4,14 @@ import de.jaunikapauni.axcore.AxCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 public class BuyDrillCommand implements CommandExecutor {
@@ -29,6 +31,8 @@ public class BuyDrillCommand implements CommandExecutor {
         ItemStack drill = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta meta = drill.getItemMeta();
         meta.displayName(Component.text(ChatColor.AQUA + "DRILL"));
+        NamespacedKey namespacedKey = new NamespacedKey(reference, "drill");
+        meta.getPersistentDataContainer().set(namespacedKey, PersistentDataType.BOOLEAN, true);
         drill.setItemMeta(meta);
         if(reference.getEconomyAPI().has(p.getUniqueId(), 1000)){
             reference.getEconomyAPI().withdraw(p.getUniqueId(), 1000);

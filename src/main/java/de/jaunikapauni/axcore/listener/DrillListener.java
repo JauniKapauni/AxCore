@@ -1,5 +1,6 @@
 package de.jaunikapauni.axcore.listener;
 
+import de.jaunikapauni.axcore.AxCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -13,13 +14,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class DrillListener implements Listener {
 
+    AxCore reference;
+    public DrillListener(AxCore reference){
+        this.reference = reference;
+    }
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
         ItemStack itemStack = e.getPlayer().getInventory().getItemInMainHand();
-        if(itemStack.getItemMeta() == null || !itemStack.getItemMeta().hasDisplayName()){
-            return;
-        }
-        if(!itemStack.getItemMeta().displayName().equals(Component.text(ChatColor.AQUA + "DRILL"))){
+        if(!reference.isDrill(itemStack)){
             return;
         }
         Block center = e.getBlock();
