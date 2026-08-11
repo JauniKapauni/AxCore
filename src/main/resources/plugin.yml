@@ -21,6 +21,7 @@ commands:
   night:
   weather:
   flyspeed:
+  buydrill:
 
 depend:
   - AxEconomy

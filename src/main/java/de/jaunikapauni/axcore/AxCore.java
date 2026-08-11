@@ -1,6 +1,7 @@
 package de.jaunikapauni.axcore;
 
 import de.jaunikapauni.axcore.command.*;
+import de.jaunikapauni.axcore.listener.DrillListener;
 import de.jaunikapauni.axeconomy.AxEconomy;
 import de.jaunikapauni.axeconomy.api.EconomyAPI;
 import org.bukkit.Bukkit;
@@ -32,6 +33,8 @@ public final class AxCore extends JavaPlugin {
         if(axEconomy != null){
             economyAPI = axEconomy.getEconomyAPI();
         }
+        getCommand("buydrill").setExecutor(new BuyDrillCommand(this));
+        getServer().getPluginManager().registerEvents(new DrillListener(), this);
         getLogger().info("");
         getLogger().info("----------------------------------------");
         getLogger().info("Name: " + getName());
