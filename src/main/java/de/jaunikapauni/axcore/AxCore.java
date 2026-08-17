@@ -95,4 +95,8 @@ public final class AxCore extends JavaPlugin {
         NamespacedKey namespacedKey = new NamespacedKey(this, "drill");
         return itemStack.getItemMeta().getPersistentDataContainer().has(namespacedKey, PersistentDataType.BOOLEAN);
     }
+
+    public void reloadHologramConfig() {
+        hologramConfig = YamlConfiguration.loadConfiguration(hologramFile);
+    }
 }

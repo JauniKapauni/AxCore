@@ -33,6 +33,11 @@ public class HologramCommand implements CommandExecutor {
             p.sendMessage(ChatColor.GREEN + "Hologram deleted!");
             return true;
         }
+        if(args[0].equalsIgnoreCase("reload")){
+            reference.getHologramManager().reload();
+            p.sendMessage(ChatColor.GREEN + "Holograms reloaded!");
+            return true;
+        }
         reference.getHologramManager().create(args[0], p.getLocation());
         p.sendMessage(ChatColor.GREEN + "Hologram created!");
         return true;

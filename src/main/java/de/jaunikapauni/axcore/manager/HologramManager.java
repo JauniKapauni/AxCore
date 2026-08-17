@@ -99,4 +99,25 @@ public class HologramManager {
         reference.getHologramConfig().set("holograms." + name, null);
         reference.saveHologramConfig();
     }
+
+    public void reload(){
+        if(reference.getHologramConfig().getConfigurationSection("holograms") != null){
+            for(String name : reference.getHologramConfig().getConfigurationSection("holograms").getKeys(false)){
+                String worldName = reference.getHologramConfig().getString("holograms." + name + ".world");
+                double x = reference.getHologramConfig().getDouble("holograms." + name + ".x");
+                double y = reference.getHologramConfig().getDouble("holograms." + name + ".y");
+                double z = reference.getHologramConfig().getDouble("holograms." + name + ".z");
+                World world = reference.getServer().getWorld(worldName);
+                if(world != null){
+                    Location location = new Location(world, x, y, z);
+                    for(TextDisplay hologram : location.getNearbyEntitiesByType(TextDisplay.class, 1)){
+                        hologram.remove();
+                    }
+                }
+            }
+        }
+        holograms.clear();
+        reference.reloadHologramConfig();
+        load();
+    }
 }
