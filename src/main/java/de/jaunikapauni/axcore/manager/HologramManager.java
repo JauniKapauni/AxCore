@@ -26,13 +26,14 @@ public class HologramManager {
     public void create(String name, Location location){
         TextDisplay hologram = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
         hologram.text(Component.text(name));
-        hologram.setBillboard(Display.Billboard.CENTER);
+        hologram.setBillboard(Display.Billboard.FIXED);
         holograms.put(name, hologram);
         reference.getHologramConfig().set("holograms." + name + ".world", location.getWorld().getName());
-        reference.getHologramConfig().set("holograms." + name + ".uuid", hologram.getUniqueId().toString());
         reference.getHologramConfig().set("holograms." + name + ".x", location.getX());
         reference.getHologramConfig().set("holograms." + name + ".y", location.getY());
         reference.getHologramConfig().set("holograms." + name + ".z", location.getZ());
+        reference.getHologramConfig().set("holograms." + name + ".yaw", location.getYaw());
+        reference.getHologramConfig().set("holograms." + name + ".pitch", location.getPitch());
         reference.saveHologramConfig();
     }
 
@@ -46,11 +47,13 @@ public class HologramManager {
             double x = reference.getHologramConfig().getDouble("holograms." + name + ".x");
             double y = reference.getHologramConfig().getDouble("holograms." + name + ".y");
             double z = reference.getHologramConfig().getDouble("holograms." + name + ".z");
+            float yaw = (float) reference.getHologramConfig().getDouble("holograms." + name + ".yaw");
+            float pitch = (float) reference.getHologramConfig().getDouble("holograms." + name + ".pitch");
             World world = reference.getServer().getWorld(worldName);
             if(world == null){
                 continue;
             }
-            Location location = new Location(world, x, y, z);
+            Location location = new Location(world, x, y, z, yaw, pitch);
             world.getChunkAt(location);
             TextDisplay hologram = null;
             if(uuidString != null){
@@ -63,7 +66,7 @@ public class HologramManager {
             if(hologram == null){
                 hologram = (TextDisplay) world.spawnEntity(location, EntityType.TEXT_DISPLAY);
                 hologram.text(Component.text(name));
-                hologram.setBillboard(TextDisplay.Billboard.CENTER);
+                hologram.setBillboard(TextDisplay.Billboard.FIXED);
             }
             holograms.put(name, hologram);
         }
