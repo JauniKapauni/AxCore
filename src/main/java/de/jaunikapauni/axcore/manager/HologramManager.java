@@ -41,34 +41,48 @@ public class HologramManager {
             return;
         }
         for(String name : reference.getHologramConfig().getConfigurationSection("holograms").getKeys(false)){
-            String world = reference.getHologramConfig().getString("holograms." + name + ".world");
+            String worldName = reference.getHologramConfig().getString("holograms." + name + ".world");
+            String uuidString = reference.getHologramConfig().getString("holograms." + name + ".uuid");
             double x = reference.getHologramConfig().getDouble("holograms." + name + ".x");
             double y = reference.getHologramConfig().getDouble("holograms." + name + ".y");
             double z = reference.getHologramConfig().getDouble("holograms." + name + ".z");
-            Location location = new Location(reference.getServer().getWorld(world), x, y, z);
-            TextDisplay hologram = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
-            hologram.text(Component.text(name));
-            hologram.setBillboard(TextDisplay.Billboard.CENTER);
+            World world = reference.getServer().getWorld(worldName);
+            if(world == null){
+                continue;
+            }
+            Location location = new Location(world, x, y, z);
+            world.getChunkAt(location);
+            TextDisplay hologram = null;
+            if(uuidString != null){
+                Entity existing = world.getEntity(UUID.fromString(uuidString));
+                if(existing instanceof TextDisplay){
+                    TextDisplay textDisplay = (TextDisplay) existing;
+                    hologram = textDisplay;
+                }
+            }
+            if(hologram == null){
+                hologram = (TextDisplay) world.spawnEntity(location, EntityType.TEXT_DISPLAY);
+                hologram.text(Component.text(name));
+                hologram.setBillboard(TextDisplay.Billboard.CENTER);
+            }
             holograms.put(name, hologram);
         }
     }
 
     public void delete(String name){
-        TextDisplay hologram = holograms.remove(name);
-        if(hologram == null){
-            String worldName = reference.getHologramConfig().getString("holograms." + name + ".world");
-            String uuidString = reference.getHologramConfig().getString("holograms." + name + ".uuid");
-            World world = reference.getServer().getWorld(worldName);
-            if(world != null && uuidString != null){
-                Entity entity = world.getEntity(UUID.fromString(uuidString));
-                if(entity instanceof TextDisplay){
-                    hologram = (TextDisplay) entity;
-                }
+        String worldName = reference.getHologramConfig().getString("holograms." + name + ".world");
+        String uuidString = reference.getHologramConfig().getString("holograms." + name + ".uuid");
+        double x = reference.getHologramConfig().getDouble("holograms." + name + ".x");
+        double y = reference.getHologramConfig().getDouble("holograms." + name + ".y");
+        double z = reference.getHologramConfig().getDouble("holograms." + name + ".z");
+        World world = reference.getServer().getWorld(worldName);
+        if(world != null){
+            Location location = new Location(world, x, y, z);
+            for(TextDisplay hologram : location.getNearbyEntitiesByType(TextDisplay.class, 1)){
+                hologram.remove();
             }
         }
-        if(hologram != null){
-            hologram.remove();
-        }
+        holograms.remove(name);
         reference.getHologramConfig().set("holograms." + name, null);
         reference.saveHologramConfig();
     }
