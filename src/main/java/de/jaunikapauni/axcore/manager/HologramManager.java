@@ -27,6 +27,11 @@ public class HologramManager {
         TextDisplay hologram = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
         hologram.text(Component.text(name));
         hologram.setBillboard(Display.Billboard.FIXED);
+        Location backLocation = location.clone();
+        backLocation.setYaw(location.getYaw() + 180);
+        TextDisplay back = (TextDisplay) location.getWorld().spawnEntity(backLocation, EntityType.TEXT_DISPLAY);
+        back.text(Component.text(name));
+        back.setBillboard(Display.Billboard.FIXED);
         holograms.put(name, hologram);
         reference.getHologramConfig().set("holograms." + name + ".world", location.getWorld().getName());
         reference.getHologramConfig().set("holograms." + name + ".x", location.getX());
@@ -67,6 +72,11 @@ public class HologramManager {
                 hologram = (TextDisplay) world.spawnEntity(location, EntityType.TEXT_DISPLAY);
                 hologram.text(Component.text(name));
                 hologram.setBillboard(TextDisplay.Billboard.FIXED);
+                Location backLocation = location.clone();
+                backLocation.setYaw(yaw + 180);
+                TextDisplay back = (TextDisplay) world.spawnEntity(backLocation, EntityType.TEXT_DISPLAY);
+                back.text(Component.text(name));
+                back.setBillboard(Display.Billboard.FIXED);
             }
             holograms.put(name, hologram);
         }
