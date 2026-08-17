@@ -2,6 +2,7 @@ package de.jaunikapauni.axcore.manager;
 
 import de.jaunikapauni.axcore.AxCore;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
@@ -24,14 +25,21 @@ public class HologramManager {
     }
 
     public void create(String name, Location location){
+        int opacity = 128;
+
         TextDisplay hologram = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
         hologram.text(Component.text(name));
         hologram.setBillboard(Display.Billboard.FIXED);
+        hologram.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
+
         Location backLocation = location.clone();
         backLocation.setYaw(location.getYaw() + 180);
+
         TextDisplay back = (TextDisplay) location.getWorld().spawnEntity(backLocation, EntityType.TEXT_DISPLAY);
         back.text(Component.text(name));
         back.setBillboard(Display.Billboard.FIXED);
+        back.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
+
         holograms.put(name, hologram);
         reference.getHologramConfig().set("holograms." + name + ".world", location.getWorld().getName());
         reference.getHologramConfig().set("holograms." + name + ".x", location.getX());
@@ -39,6 +47,7 @@ public class HologramManager {
         reference.getHologramConfig().set("holograms." + name + ".z", location.getZ());
         reference.getHologramConfig().set("holograms." + name + ".yaw", location.getYaw());
         reference.getHologramConfig().set("holograms." + name + ".pitch", location.getPitch());
+        reference.getHologramConfig().set("holograms." + name + ".background-opacity", opacity);
         reference.saveHologramConfig();
     }
 
@@ -54,6 +63,7 @@ public class HologramManager {
             double z = reference.getHologramConfig().getDouble("holograms." + name + ".z");
             float yaw = (float) reference.getHologramConfig().getDouble("holograms." + name + ".yaw");
             float pitch = (float) reference.getHologramConfig().getDouble("holograms." + name + ".pitch");
+            int opacity = reference.getHologramConfig().getInt("holograms." + name + ".background-opacity", 128);
             World world = reference.getServer().getWorld(worldName);
             if(world == null){
                 continue;
@@ -72,11 +82,13 @@ public class HologramManager {
                 hologram = (TextDisplay) world.spawnEntity(location, EntityType.TEXT_DISPLAY);
                 hologram.text(Component.text(name));
                 hologram.setBillboard(TextDisplay.Billboard.FIXED);
+                hologram.setBackgroundColor(Color.fromARGB(opacity, 0 ,0 ,0));
                 Location backLocation = location.clone();
                 backLocation.setYaw(yaw + 180);
                 TextDisplay back = (TextDisplay) world.spawnEntity(backLocation, EntityType.TEXT_DISPLAY);
                 back.text(Component.text(name));
                 back.setBillboard(Display.Billboard.FIXED);
+                back.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
             }
             holograms.put(name, hologram);
         }
