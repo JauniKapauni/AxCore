@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public class HologramCommand implements CommandExecutor {
 
     AxCore reference;
@@ -38,8 +40,15 @@ public class HologramCommand implements CommandExecutor {
             p.sendMessage(ChatColor.GREEN + "Holograms reloaded!");
             return true;
         }
-        reference.getHologramManager().create(args[0], p.getLocation());
-        p.sendMessage(ChatColor.GREEN + "Hologram created!");
-        return true;
+        if(args[0].equalsIgnoreCase("create")){
+            if(args.length < 2){
+                return false;
+            }
+            String text = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+            reference.getHologramManager().create(text, p.getLocation());
+            p.sendMessage(ChatColor.GREEN + "Hologram created!");
+            return true;
+        }
+        return false;
     }
 }
