@@ -11,6 +11,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.Transformation;
+import org.joml.Vector3f;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +28,14 @@ public class HologramManager {
 
     public void create(String name, Location location){
         int opacity = 128;
+        float scale = 1.0f;
 
         TextDisplay hologram = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
         hologram.text(Component.text(name));
         hologram.setBillboard(Display.Billboard.FIXED);
         hologram.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
+        Transformation transformation = hologram.getTransformation();
+        hologram.setTransformation(new Transformation(transformation.getTranslation(), transformation.getLeftRotation(), new Vector3f(scale, scale, scale), transformation.getRightRotation()));
 
         Location backLocation = location.clone();
         backLocation.setYaw(location.getYaw() + 180);
@@ -39,6 +44,8 @@ public class HologramManager {
         back.text(Component.text(name));
         back.setBillboard(Display.Billboard.FIXED);
         back.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
+        transformation = back.getTransformation();
+        back.setTransformation(new Transformation(transformation.getTranslation(), transformation.getLeftRotation(), new Vector3f(scale, scale, scale), transformation.getRightRotation()));
 
         holograms.put(name, hologram);
         reference.getHologramConfig().set("holograms." + name + ".world", location.getWorld().getName());
@@ -48,6 +55,7 @@ public class HologramManager {
         reference.getHologramConfig().set("holograms." + name + ".yaw", location.getYaw());
         reference.getHologramConfig().set("holograms." + name + ".pitch", location.getPitch());
         reference.getHologramConfig().set("holograms." + name + ".background-opacity", opacity);
+        reference.getHologramConfig().set("holograms." + name + ".scale", scale);
         reference.saveHologramConfig();
     }
 
@@ -64,6 +72,7 @@ public class HologramManager {
             float yaw = (float) reference.getHologramConfig().getDouble("holograms." + name + ".yaw");
             float pitch = (float) reference.getHologramConfig().getDouble("holograms." + name + ".pitch");
             int opacity = reference.getHologramConfig().getInt("holograms." + name + ".background-opacity", 128);
+            float scale = (float) reference.getHologramConfig().getDouble("holograms." + name + ".scale", 1.0);
             World world = reference.getServer().getWorld(worldName);
             if(world == null){
                 continue;
@@ -83,12 +92,17 @@ public class HologramManager {
                 hologram.text(Component.text(name));
                 hologram.setBillboard(TextDisplay.Billboard.FIXED);
                 hologram.setBackgroundColor(Color.fromARGB(opacity, 0 ,0 ,0));
+                Transformation transformation = hologram.getTransformation();
+                hologram.setTransformation(new Transformation(transformation.getTranslation(), transformation.getLeftRotation(), new Vector3f(scale, scale, scale), transformation.getRightRotation()));
+
                 Location backLocation = location.clone();
                 backLocation.setYaw(yaw + 180);
                 TextDisplay back = (TextDisplay) world.spawnEntity(backLocation, EntityType.TEXT_DISPLAY);
                 back.text(Component.text(name));
                 back.setBillboard(Display.Billboard.FIXED);
                 back.setBackgroundColor(Color.fromARGB(opacity, 0, 0, 0));
+                transformation = back.getTransformation();
+                back.setTransformation(new Transformation(transformation.getTranslation(), transformation.getLeftRotation(), new Vector3f(scale, scale, scale), transformation.getRightRotation()));
             }
             holograms.put(name, hologram);
         }
