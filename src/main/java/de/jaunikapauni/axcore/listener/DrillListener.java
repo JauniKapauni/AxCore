@@ -27,13 +27,13 @@ public class DrillListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
+        ItemStack itemStack = e.getPlayer().getInventory().getItemInMainHand();
+        if(!reference.isDrill(itemStack)){
+            return;
+        }
         if(reference.getConfig().getStringList("disabled-worlds").contains(e.getBlock().getWorld().getName())){
             e.setCancelled(true);
             e.getPlayer().sendMessage(ChatColor.RED + "You can't use that tool in this world!");
-            return;
-        }
-        ItemStack itemStack = e.getPlayer().getInventory().getItemInMainHand();
-        if(!reference.isDrill(itemStack)){
             return;
         }
         Block center = e.getBlock();
