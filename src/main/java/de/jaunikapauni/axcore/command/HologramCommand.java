@@ -24,6 +24,10 @@ public class HologramCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axcore.hologram")){
+            p.sendMessage("You don't have the permission! [axcore.hologram]");
+            return true;
+        }
         if(args.length == 0){
             return false;
         }
