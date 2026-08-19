@@ -30,8 +30,8 @@ public class BuyDrillCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        if(!p.hasPermission("axcore.day")){
-            p.sendMessage("You don't have the permission! [axcore.day]");
+        if(!p.hasPermission("axcore.buydrill")){
+            p.sendMessage("You don't have the permission! [axcore.buydrill]");
             return true;
         }
         ItemStack drill = new ItemStack(Material.DIAMOND_PICKAXE);
