@@ -5,6 +5,7 @@ Minecraft plugin that adds all essential commands to a minecraft server
 ## Commands & Permissions
 - `/buydrill` - `axcore.buydrill`
 - `/day` - `axcore.day`
+- `/dispose` - `axcore.dispose`
 - `/feed` - `axcore.feed`
 - `/fly` - `axcore.fly`
 - `/flyspeed` - `axcore.flyspeed`
